@@ -1,0 +1,131 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+    color-scheme: light dark !important;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: unset;
+    color: unset;
+}
+
+.card {
+    border: .02rem solid #686868;
+    transition: ease-in-out .5s;
+}
+
+.card:hover {
+    background-color: RGBA(33, 37, 41, 0.4) !important;
+    transform: scale(1.01);
+}
+
+.card .description {
+    min-height: 7rem;
+}
+
+.card-movie {
+    border-radius: 0px 8px 8px 0px;
+    height: 100%;
+}
+
+.card-movie:hover {
+    transform: scale(1);
+    background-color: unset;
+}
+
+.content-img-movie .photo {
+    height: 100%;
+}
+
+.content-img-movie img {
+    border-radius: 8px 0px 0px 8px;
+    height: 100%;
+}
+
+.content-img-movie span {
+    border-radius: 0px 0px 0px 8px;
+}
+
+.list-group-item {
+    background-color: unset;
+    color: #fff;
+    border-color: #626262;
+}
+
+.custom-text {
+    color: #c7c7c7;
+    padding: 0 .5rem;
+}
+
+.custom-anchor {
+    color: #c7c7c7;
+    padding: 0 .5rem;
+    text-decoration: none;
+}
+
+.custom-anchor:hover {
+    color: #929292;
+}
+
+.photo {
+    position: relative;
+    min-height: 6rem;
+}
+
+.photo span {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    font-size: 12px;
+    padding: 5px 10px;
+    background-color: #d53434;
+}
+
+
+
+.ellipsis {
+    overflow: hidden;
+    height: 6.7rem;
+    line-height: 25px;
+    margin: 20px;
+}
+
+.ellipsis:before {
+    content: "";
+    float: left;
+    width: 5px;
+    height: 7rem;
+}
+
+.ellipsis>*:first-child {
+    float: right;
+    width: 100%;
+    margin-left: -5px;
+}
+
+.ellipsis:after {
+    content: "\02026";
+    box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    float: right;
+    position: relative;
+    top: -25px;
+    left: 100%;
+    width: 3em;
+    margin-left: -3em;
+    padding-right: 5px;
+    text-align: right;
+}
+
+@media (max-width: 992px) {
+    .content-img-movie span {
+        border-radius: 0px 8px 0px 0px;
+    }
+
+    .content-img-movie img {
+        border-radius: 8px 8px 0px 0px;
+    }
+}

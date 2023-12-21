@@ -1,0 +1,153 @@
+<div class="container mt-4 px-2">
+    <h1>
+        @if (isFindId) {
+        Movie
+        }@else{
+        Movies
+        }
+    </h1>
+    <hr>
+
+    <div class="row p-2 mt-3">
+        @if (isFindId) {
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-xs-12 col-lg-7 rounded-start p-0 content-img-movie">
+                    @defer {
+                    <app-image-movie imageMovie="{{dataMovie.thumbnail}}" altImageMovie="{{dataMovie.title}}/img"
+                        genre="{{dataMovie.genre}}"></app-image-movie>
+                    }@placeholder {
+                    <span>{{dataMovie.title}}/img</span>
+                    }@loading {
+                    <span class="text-center">Cargando...</span>
+                    }
+                </div>
+                <div class="col-xs-12 col-lg-5 p-0 rounded-end">
+                    <div class="card text-bg-dark mb-3 card-movie">
+                        <div class="card-body w-100">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><b>Title :</b> <span
+                                        class="custom-text">{{dataMovie.title}}</span></li>
+                                <li class="list-group-item"><b>Developer :</b> <span
+                                        class="custom-text">{{dataMovie.developer}}</span></li>
+                                <li class="list-group-item"><b>Publisher :</b> <span
+                                        class="custom-text">{{dataMovie.publisher}}</span></li>
+                                <li class="list-group-item"><b>Short Description :</b> <span
+                                        class="custom-text">{{dataMovie.short_description}}</span></li>
+                                <li class="list-group-item"><b>Status :</b> <span
+                                        class="custom-text">{{dataMovie.status}}</span></li>
+                                <li class="list-group-item"><b>Release Date :</b> <span
+                                        class="custom-text">{{dataMovie.release_date}}</span></li>
+                                <li class="list-group-item"><b>Game URL :</b> <a href="{{dataMovie.game_url}}"
+                                        class="custom-anchor">{{dataMovie.game_url}}</a></li>
+                                <li class="list-group-item"><b>Platform :</b> <span
+                                        class="custom-text">{{dataMovie.platform}}</span></li>
+                                <li class="list-group-item"></li>
+                            </ul>
+                            <button class="btn btn-light w-100 mt-1" (click)="getCard(dataMovie.id,'return')">Go
+                                Back</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }@else {
+        <h5>Filters</h5>
+        <div class="options d-flex gap-4 flex-wrap flex-md-nowrap">
+            <input class="form-control form-control-sm" type="text" placeholder="Name of the movie"
+                aria-label=".form-control-sm example">
+            <select #genre (change)="onSelected(genre.value,'genre')" class="form-select form-select-sm"
+                aria-label=".form-select-sm example">
+                <option selected value="">Genre</option>
+                <option value="mmorpg">MMORPG</option>
+                <option value="shooter">Shooter</option>
+                <option value="strategy">Strategy</option>
+                <option value="moba">Moba</option>
+                <option value="racing">Racing</option>
+                <option value="sports">Sports</option>
+                <option value="social">Social</option>
+                <option value="sandbox">Sandbox</option>
+                <option value="open-world">Open World</option>
+                <option value="survival">Survival</option>
+                <option value="pvp">PVP</option>
+                <option value="pve">PVE</option>
+                <option value="pixel">Pixel</option>
+                <option value="voxel">Voxel</option>
+                <option value="zombie">Zombie</option>
+                <option value="turn-based">Turn Based</option>
+                <option value="first-person">First Person</option>
+                <option value="third-Person">Third Person</option>
+                <option value="top-down">Top Down</option>
+                <option value="tank">Tank</option>
+                <option value="space">Space</option>
+                <option value="sailing">Sailing</option>
+                <option value="side-scroller">Side Scroller</option>
+                <option value="superhero">Superhero</option>
+                <option value="permadeath">Permadeath</option>
+                <option value="card">Card</option>
+                <option value="battle-royale">Battle Royale</option>
+                <option value="mmo">MMO</option>
+                <option value="mmofps">MMOFPS</option>
+                <option value="mmotps">MMOTPS</option>
+                <option value="3d">3d</option>
+                <option value="2d">2d</option>
+                <option value="anime">Anime</option>
+                <option value="fantasy">Fantasy</option>
+                <option value="sci-fi">Sci-Fi</option>
+                <option value="fighting">Fighting</option>
+                <option value="action-rpg">Action Rpg</option>
+                <option value="action">Action</option>
+                <option value="military">Military</option>
+                <option value="martial-arts">Martial Arts</option>
+                <option value="flight">Flight</option>
+                <option value="low-spec">Low Spec</option>
+                <option value="tower-defense">Tower Defense</option>
+                <option value="horror">horror</option>
+            </select>
+            <select #platform (change)="onSelected(platform.value,'platform')" class="form-select form-select-sm"
+                aria-label=".form-select-sm example">
+                <option selected value="">Platform</option>
+                <option value="pc">PC (Windows)</option>
+                <option value="browser">Web Browser</option>
+            </select>
+        </div>
+        @if (isEmptyFilters) {
+        <span class="text-danger mt-1">{{filterError}}</span>
+        }
+        <div class="d-flex justify-content-end mt-2 mb-3">
+            <button class="btn btn-light" (click)="getFilterMovie()">Get movies</button>
+        </div>
+        <hr>
+        @for (item of data; track item.id) {
+        <div class="col-xs-12 col-sm-6 col-md-4 col-xl-3">
+            <div class="card text-bg-dark mb-3">
+                @defer {
+                <app-image-movie imageMovie="{{item.thumbnail}}" altImageMovie="{{item.title}}/img"
+                    genre="{{item.genre}}"></app-image-movie>
+                }@placeholder(minimum 2000ms) {
+                <span>{{item.title}}/img</span>
+                }@loading {
+                <span class="text-center">Cargando...</span>
+                }
+                <div class="card-body w-100 d-block">
+                    <div class="w-100 d-block text-truncate">
+                        <h5 class="card-title text-center">{{item.title}}</h5>
+                        <p class="card-text text-center">{{item.developer}}</p>
+                    </div>
+                    <hr>
+                    <div class="ellipsis">
+                        <small class="text-center">{{item.short_description}}</small>
+                    </div>
+                    <div class="options">
+                        <button class="btn btn-light w-100" (click)="getCard(item.id,'see')">Show</button>
+                    </div>
+                </div>
+                <div class="card-footer text-muted text-center">
+                    {{item.platform}}
+                </div>
+            </div>
+        </div>
+        }
+        }
+    </div>
+</div>
